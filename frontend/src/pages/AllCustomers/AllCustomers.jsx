@@ -77,7 +77,7 @@ const AllCustomers = () => {
                             <td>{customer.phone}</td>
                             <td>{customer.alternatePhone}</td>
                             <td>
-                                <button onClick={() => navigate("/updateCustomer", { state: customer._id })}><FaPen color='black' size={25} /></button>
+                                <button  onClick={() => navigate("/updateCustomer", { state: customer._id })}><FaPen color='black' size={25} /></button>
                                 <button onClick={() => handleDelete(customer._id)}><MdDelete color='black' size={25}  /></button>
                             </td>
                         </tr>
