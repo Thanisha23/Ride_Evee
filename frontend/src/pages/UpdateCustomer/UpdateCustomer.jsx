@@ -18,7 +18,7 @@ const UpdateCustomer = () => {
     useEffect(() => {
         const fetchCustomer = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.BACKEND_URL}/api/v1/customer/findCustomer/${customerId}`);
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/customer/findCustomer/${customerId}`);
                 setCustomer(response.data.customer);
             } catch (error) {
                 console.error("Error fetching customer:", error);
@@ -38,7 +38,7 @@ const UpdateCustomer = () => {
 
     const updateCustomer = async () => {
         try {
-            const response = await axios.put(`${import.meta.env.BACKEND_URL}/api/v1/customer/updateCustomer`, {
+            const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/v1/customer/updateCustomer`, {
                 id: customerId,
                 ...customer
             }, {
