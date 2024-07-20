@@ -73,9 +73,7 @@
 }
 
 
-.card-actions button:nth-child(even) {
-    background-color: white;
-}
+
 .card-actions button:first-child {
     background-color: #4CAF50;
     color: white;
@@ -86,3 +84,22 @@
     color: white;
 }
 
+.loading-skeleton {
+    padding: 20px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    margin: 10px 0;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        background-color: #f0f0f0;
+    }
+    50% {
+        background-color: #e0e0e0;
+    }
+    100% {
+        background-color: #f0f0f0;
+    }
+}

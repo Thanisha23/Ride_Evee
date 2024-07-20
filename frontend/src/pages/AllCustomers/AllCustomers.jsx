@@ -11,9 +11,15 @@ const AllCustomers = () => {
     const dispatch = useDispatch();
     const customers = useSelector(state => state.customers);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        dispatch(fetchCustomers());
+        const fetchData = async () => {
+            setIsLoading(true);
+            await dispatch(fetchCustomers());
+            setIsLoading(false);
+        };
+        fetchData();
 
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 768);
@@ -32,6 +38,10 @@ const AllCustomers = () => {
             console.error(error);
         }
     };
+
+    if (isLoading) {
+        return <div className="loading-skeleton">Loading...</div>;
+    }
 
     if (isMobile) {
         return (
@@ -77,8 +87,8 @@ const AllCustomers = () => {
                             <td>{customer.phone}</td>
                             <td>{customer.alternatePhone}</td>
                             <td>
-                                <button  onClick={() => navigate("/updateCustomer", { state: customer._id })}><FaPen color='black' size={25} /></button>
-                                <button onClick={() => handleDelete(customer._id)}><MdDelete color='black' size={25}  /></button>
+                                <button onClick={() => navigate("/updateCustomer", { state: customer._id })}><FaPen color='black' size={25} /></button>
+                                <button onClick={() => handleDelete(customer._id)}><MdDelete color='black' size={25} /></button>
                             </td>
                         </tr>
                     ))}

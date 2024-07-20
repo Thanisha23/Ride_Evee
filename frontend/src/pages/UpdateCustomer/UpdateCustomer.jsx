@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import LabelledInputType from "../../components/LabelledInputTypes/LabelledInputTypes";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import "./UpdateCustomer.css"
 const UpdateCustomer = () => {
     const location = useLocation();
     const navigate = useNavigate();
@@ -14,15 +14,19 @@ const UpdateCustomer = () => {
         phone: "",
         alternatePhone: ""
     });
+    const [isLoading, setIsLoading] = useState(true);
+    const [isUpdating, setIsUpdating] = useState(false);
 
     useEffect(() => {
         const fetchCustomer = async () => {
+            setIsLoading(true);
             try {
                 const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/customer/findCustomer/${customerId}`);
                 setCustomer(response.data.customer);
             } catch (error) {
                 console.error("Error fetching customer:", error);
             }
+            setIsLoading(false);
         };
 
         fetchCustomer();
@@ -37,6 +41,7 @@ const UpdateCustomer = () => {
     };
 
     const updateCustomer = async () => {
+        setIsUpdating(true);
         try {
             const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/v1/customer/updateCustomer`, {
                 id: customerId,
@@ -54,8 +59,14 @@ const UpdateCustomer = () => {
             }
         } catch (error) {
             console.error("Error updating customer:", error);
+        } finally {
+            setIsUpdating(false);
         }
     };
+
+    if (isLoading) {
+        return <div className="loading-skeleton">Loading...</div>;
+    }
 
     return (
         <div className="main">
@@ -105,8 +116,8 @@ const UpdateCustomer = () => {
                 </div>
             </form>
             <div className="button-div">
-                <button onClick={updateCustomer} type="button" className="button">
-                    Update
+                <button onClick={updateCustomer} type="button" className="button" disabled={isUpdating}>
+                    {isUpdating ? 'Updating...' : 'Update'}
                 </button>
             </div>
         </div>
