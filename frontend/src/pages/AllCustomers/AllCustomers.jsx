@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { MdDelete } from "react-icons/md";
@@ -10,9 +10,17 @@ const AllCustomers = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const customers = useSelector(state => state.customers);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
     useEffect(() => {
         dispatch(fetchCustomers());
+
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, [dispatch]);
 
     const handleDelete = async (id) => {
@@ -25,9 +33,29 @@ const AllCustomers = () => {
         }
     };
 
+    if (isMobile) {
+        return (
+            <div className="customer-cards">
+                {customers.map((customer) => (
+                    <div key={customer._id} className="customer-card">
+                        <h3>{customer.firstName} {customer.lastName}</h3>
+                        <p><strong>ID:</strong> {customer._id}</p>
+                        <p><strong>Email:</strong> {customer.email}</p>
+                        <p><strong>Phone:</strong> {customer.phone}</p>
+                        <p><strong>Alt Phone:</strong> {customer.alternatePhone}</p>
+                        <div className="card-actions">
+                            <button onClick={() => navigate("/updateCustomer", { state: customer._id })}><FaPen /> Edit</button>
+                            <button onClick={() => handleDelete(customer._id)}><MdDelete /> Delete</button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        );
+    }
+
     return (
         <div className="table-container">
-            <table className="responsive-table">
+            <table className="customer-table">
                 <thead>
                     <tr>
                         <th>Customer ID</th>
@@ -42,16 +70,14 @@ const AllCustomers = () => {
                 <tbody>
                     {customers.map((customer) => (
                         <tr key={customer._id}>
-                            <td data-label="Customer ID">{customer._id}</td>
-                            <td data-label="First Name">{customer.firstName}</td>
-                            <td data-label="Last Name">{customer.lastName}</td>
-                            <td data-label="Email">{customer.email}</td>
-                            <td data-label="Phone Number">{customer.phone}</td>
-                            <td data-label="Alt Phone Number">{customer.alternatePhone}</td>
-                            <td data-label="Actions">
-                                <button onClick={() => navigate("/updateCustomer", {
-                                    state: customer._id
-                                })}><FaPen /></button>
+                            <td>{customer._id}</td>
+                            <td>{customer.firstName}</td>
+                            <td>{customer.lastName}</td>
+                            <td>{customer.email}</td>
+                            <td>{customer.phone}</td>
+                            <td>{customer.alternatePhone}</td>
+                            <td>
+                                <button onClick={() => navigate("/updateCustomer", { state: customer._id })}><FaPen /></button>
                                 <button onClick={() => handleDelete(customer._id)}><MdDelete /></button>
                             </td>
                         </tr>
