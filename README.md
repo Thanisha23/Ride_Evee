@@ -1,7 +1,5 @@
 <h1 align="center">Ride_Evee</h1>
-<p align="center">
-  <img src="./frontend/public//assets/paybuddy-1.1.png" alt="PayBuddy">
-</p>
+
 
 
 ## Technology used: 
