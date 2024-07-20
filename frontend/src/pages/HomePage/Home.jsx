@@ -8,7 +8,7 @@ const Home = () => {
             navigate("/adduser")
         }}>Add Customer</button>
         <button onClick={() => {
-          navigate("/adduser")
+          navigate("/allcustomers")
       }}>View Customers</button>
     </div>
   )
