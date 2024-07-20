@@ -55,7 +55,7 @@ const UpdateCustomer = () => {
 
             if (response.data) {
                 console.log("Customer updated successfully");
-                navigate('/updateCustomer');
+                navigate('/allcustomers');
             }
         } catch (error) {
             console.error("Error updating customer:", error);
