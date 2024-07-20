@@ -26,8 +26,8 @@ const AllCustomers = () => {
     };
 
     return (
-        <div>
-            <table style={{ borderCollapse: 'collapse', width: '100%' }}>
+        <div className="table-container">
+            <table className="responsive-table">
                 <thead>
                     <tr>
                         <th>Customer ID</th>
@@ -42,13 +42,13 @@ const AllCustomers = () => {
                 <tbody>
                     {customers.map((customer) => (
                         <tr key={customer._id}>
-                            <td className='tableCell'>{customer._id}</td>
-                            <td className='tableCell'>{customer.firstName}</td>
-                            <td className='tableCell'>{customer.lastName}</td>
-                            <td className='tableCell'>{customer.email}</td>
-                            <td className='tableCell'>{customer.phone}</td>
-                            <td className='tableCell'>{customer.alternatePhone}</td>
-                            <td className='tableCell'>
+                            <td data-label="Customer ID">{customer._id}</td>
+                            <td data-label="First Name">{customer.firstName}</td>
+                            <td data-label="Last Name">{customer.lastName}</td>
+                            <td data-label="Email">{customer.email}</td>
+                            <td data-label="Phone Number">{customer.phone}</td>
+                            <td data-label="Alt Phone Number">{customer.alternatePhone}</td>
+                            <td data-label="Actions">
                                 <button onClick={() => navigate("/updateCustomer", {
                                     state: customer._id
                                 })}><FaPen /></button>
