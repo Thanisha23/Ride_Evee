@@ -1,7 +1,7 @@
 import "./App.css"
 import AddUser from "../src/pages/AddCustomer/AddUser"
 import { BrowserRouter,Routes,Route } from "react-router-dom"
-import Home from "./pages/Home"
+import Home from "./pages/HomePage/Home"
 import AllCustomers from "../src/pages/AllCustomers/AllCustomers"
 import UpdateCustomer from "./pages/UpdateCustomer/UpdateCustomer"
 const App = () => {
