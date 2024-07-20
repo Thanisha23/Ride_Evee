@@ -4,7 +4,7 @@ import axios from 'axios';
 export const fetchCustomers = createAsyncThunk(
   'customers/fetchCustomers',
   async () => {
-    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/customer/allCustomers`);
+    const response = await axios.get(`${import.meta.env.BACKEND_URL}/api/v1/customer/allCustomers`);
     return response.data.customers;
   }
 );
@@ -12,7 +12,7 @@ export const fetchCustomers = createAsyncThunk(
 export const deleteCustomer = createAsyncThunk(
   'customers/deleteCustomer',
   async (id) => {
-    await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/v1/customer/deleteCustomer`, {
+    await axios.delete(`${import.meta.env.BACKEND_URL}/api/v1/customer/deleteCustomer`, {
       data: { id },
       withCredentials: true,
       headers: { "Content-Type": "application/json" }
