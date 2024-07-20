@@ -1,0 +1,16 @@
+
+
+th{
+    background-color: rgb(34, 218, 93) ;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+.tableCell{
+    border: 1px solid #ddd;
+}
+
+button{
+    margin-right: 5px;
+    cursor: pointer;
+}

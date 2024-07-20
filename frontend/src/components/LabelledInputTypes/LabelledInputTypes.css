@@ -1,0 +1,17 @@
+.labelled-main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-family: Geneva, Verdana;
+  }
+  
+  .labelled-main label {
+    font-weight: bold;
+  }
+  
+  .labelled-main input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+  }
+  
